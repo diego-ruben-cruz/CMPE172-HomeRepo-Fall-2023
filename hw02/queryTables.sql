@@ -1,4 +1,5 @@
--- Q00: Retrive the birth date and address of the employee(s) whose name is 'John B. Smith'
+USE cmpe172;
+-- Q00: Retrieve the birth date and address of the employee(s) whose name is 'John B. Smith'
 SELECT Bdate,
     Address
 FROM employee
@@ -144,9 +145,9 @@ DELETE FROM EMPLOYEE
 WHERE Dno = 5;
 -- U04D: Delete all employee entries, they got laid off in the recent tech bubble burst
 DELETE FROM EMPLOYEE;
---U05: Re-enables all foreign key checks to preserve ref integrity
+-- Re-enables all foreign key checks to preserve ref integrity
 SET FOREIGN_KEY_CHECKS = 1;
---U05: Change the location and controlling dept number of project number 10 to 'Bellaire' and 5, respectively
+-- U05: Change the location and controlling dept number of project number 10 to 'Bellaire' and 5, respectively
 UPDATE project
 SET Plocation = 'Bellaire',
     Dnum = 5

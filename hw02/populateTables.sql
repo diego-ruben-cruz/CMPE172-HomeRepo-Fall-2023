@@ -1,3 +1,4 @@
+USE cmpe172;
 -- Insert values into the employee table
 INSERT INTO employee
 VALUES (
