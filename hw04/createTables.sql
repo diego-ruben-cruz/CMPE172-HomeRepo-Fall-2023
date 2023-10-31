@@ -54,19 +54,19 @@ CREATE TABLE DEPENDENT (
     FOREIGN KEY (Essn) REFERENCES EMPLOYEE(Ssn)
 );
 /* R05: Create trigger to prevent salary violation between an employee and their supervisor */
-CREATE TEMPORARY TABLE INFORM_SUPERVISOR(super_ssn int, ssn int);
 CREATE TRIGGER SALARY_VIOLATION BEFORE
-UPDATE ON EMPLOYEE FOR EACH ROW BEGIN IF (
-        NEW.Salary > (
-            SELECT Salary
-            FROM employee
-            WHERE Ssn = NEW.Super_ssn
-        )
-    ) THEN
-SELECT New.Super_ssn,
-    New.Ssn INTO INFORM_SUPERVISOR;
+INSERT ON EMPLOYEE FOR EACH ROW BEGIN -- Declare a variable to store the supervisor's salary
+DECLARE supervisorSalary DECIMAL(10, 2);
+-- Retrieve the supervisor's salary
+SELECT Salary INTO supervisorSalary
+FROM EMPLOYEE
+WHERE Ssn = NEW.Super_ssn;
+-- Check for salary violation
+IF NEW.Salary > supervisorSalary THEN -- Notify supervisor (replace with your notification mechanism)
+SIGNAL SQLSTATE '45000'
+SET MESSAGE_TEXT = 'Salary violation detected. Notify supervisor.';
 END IF;
-END
+END;
 /* V1: View one */
 CREATE VIEW WORKS_ON1 AS
 SELECT Fname,

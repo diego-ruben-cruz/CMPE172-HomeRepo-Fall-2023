@@ -1,5 +1,5 @@
 USE cmpe172;
-/* Q18: Retrieve the names of all emploees who do not have supervisors*/
+/* Q18: Retrieve the names of all employees who do not have supervisors*/
 SELECT Fname,
     Lname
 FROM EMPLOYEE
@@ -170,19 +170,13 @@ FROM (
         JOIN EMPLOYEE ON Mgr_ssn = Ssn
     )
 WHERE Plocation = 'Stafford';
-/* Q19: Retrieve the total salary paid, the maximum/minimum salaries paid, as well as the average salary of an employee */
-SELECT SUM(Salary),
-    MAX(Salary),
-    MIN(Salary),
-    AVG(Salary)
-FROM EMPLOYEE;
 /* Q08C: Perform join based on comparison operators */
 SELECT E.Lname,
     S.Lname
 FROM EMPLOYEE E,
     EMPLOYEE S
 WHERE E.Super_ssn = S.Ssn;
-/* Q19: Find the sum of the salaries of all employees, the maximum salary, the minimum salary, and the average salary */
+/* Q19': Find the sum of the salaries of all employees, the maximum salary, the minimum salary, and the average salary */
 SELECT SUM (Salary),
     MAX (Salary),
     MIN (Salary),
@@ -204,10 +198,10 @@ FROM (
         JOIN DEPARTMENT ON Dno = Dnumber
     )
 WHERE Dname = 'Research';
-/* Q21: Retrive the total number of employees in the company */
+/* Q21: Retrieve the total number of employees in the company */
 SELECT COUNT(*)
 FROM EMPLOYEE;
-/* Q22: Retrive the number of employees in the 'Research' Department */
+/* Q22: Retrieve the number of employees in the 'Research' Department */
 SELECT COUNT(*)
 FROM EMPLOYEE,
     DEPARTMENT
@@ -250,7 +244,7 @@ WHERE Pnumber = Pno
 GROUP BY Pnumber,
     Pname
 HAVING COUNT(*) > 2;
-/* Q27: For each proejct, retrieve the project number, the project name, and te number of employees from department 5 who work on the project */
+/* Q27: For each project, retrieve the project number, the project name, and te number of employees from department 5 who work on the project */
 SELECT Pnumber,
     Pname,
     COUNT (*)
@@ -320,7 +314,7 @@ SET Pname = 'ProductY'
 WHERE Lname = 'Smith'
     AND Fname = 'John'
     AND Pname = 'ProductX';
--- /* UV02: Update is not permitted on aggregate views */
--- UPDATE dept_info
--- SET Total_Sal = 100000
--- WHERE Dname = 'Research';
+/* UV02: Update is not permitted on aggregate views */
+UPDATE dept_info
+SET Total_Sal = 100000
+WHERE Dname = 'Research';
