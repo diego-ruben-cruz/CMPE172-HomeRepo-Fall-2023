@@ -1,0 +1,12 @@
+/* V01A: Drop the View V1 */
+DROP VIEW IF EXISTS WORKS_ON1;
+DROP VIEW IF EXISTS DEPT_INFO;
+/* Clean up for the rest of the database, run this when redoing testing */
+DROP TABLE IF EXISTS INFORM_SUPERVISOR;
+DROP TABLE IF EXISTS DEPENDENT;
+DROP TABLE IF EXISTS works_on;
+DROP TABLE IF EXISTS works_on;
+DROP TABLE IF EXISTS project;
+DROP TABLE IF EXISTS dept_locations;
+DROP TABLE IF EXISTS department;
+DROP TABLE IF EXISTS employee;

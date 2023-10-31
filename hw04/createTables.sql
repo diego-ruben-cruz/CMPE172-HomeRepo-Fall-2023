@@ -1,4 +1,3 @@
-CREATE DATABASE IF NOT EXISTS cmpe172;
 USE cmpe172;
 CREATE TABLE EMPLOYEE (
     Fname VARCHAR(15) NOT NULL,
@@ -54,8 +53,8 @@ CREATE TABLE DEPENDENT (
     PRIMARY KEY (Essn, Dependent_name),
     FOREIGN KEY (Essn) REFERENCES EMPLOYEE(Ssn)
 );
-/* R05:  Create trigger to ensure that the  */
-DELIMITER / / CREATE TEMPORARY TABLE INFORM_SUPERVISOR(Super_ssn int, ssn int);
+/* R05: Create trigger to prevent salary violation between an employee and their supervisor */
+CREATE TEMPORARY TABLE INFORM_SUPERVISOR(super_ssn int, ssn int);
 CREATE TRIGGER SALARY_VIOLATION BEFORE
 UPDATE ON EMPLOYEE FOR EACH ROW BEGIN IF (
         NEW.Salary > (
@@ -64,10 +63,10 @@ UPDATE ON EMPLOYEE FOR EACH ROW BEGIN IF (
             WHERE Ssn = NEW.Super_ssn
         )
     ) THEN
-SELECT NEW.Super_ssn,
-    NEW.Ssn INTO INFORM_SUPERVISOR;
+SELECT New.Super_ssn,
+    New.Ssn INTO INFORM_SUPERVISOR;
 END IF;
-END / / DELIMITER;
+END
 /* V1: View one */
 CREATE VIEW WORKS_ON1 AS
 SELECT Fname,

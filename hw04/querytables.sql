@@ -1,3 +1,4 @@
+USE cmpe172;
 /* Q18: Retrieve the names of all emploees who do not have supervisors*/
 SELECT Fname,
     Lname
@@ -145,7 +146,7 @@ SELECT Fname,
     Address
 FROM (
         EMPLOYEE
-        NATURAL JOIN (DEPARTMENT AS DEPT (Dname, Dno, Mssn, Msdate))
+        NATURAL JOIN (DEPARTMENT AS DEPT)
     )
 WHERE Dname = 'Research';
 /* Q08B: Perform an outer join */
@@ -319,7 +320,7 @@ SET Pname = 'ProductY'
 WHERE Lname = 'Smith'
     AND Fname = 'John'
     AND Pname = 'ProductX';
-/* UV02: Update is not permitted on aggregate views */
-UPDATE dept_info
-SET Total_Sal = 100000
-WHERE Dname = 'Research';
+-- /* UV02: Update is not permitted on aggregate views */
+-- UPDATE dept_info
+-- SET Total_Sal = 100000
+-- WHERE Dname = 'Research';
