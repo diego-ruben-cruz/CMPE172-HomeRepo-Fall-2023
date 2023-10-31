@@ -54,3 +54,37 @@ CREATE TABLE DEPENDENT (
     PRIMARY KEY (Essn, Dependent_name),
     FOREIGN KEY (Essn) REFERENCES EMPLOYEE(Ssn)
 );
+/* R05:  Create trigger to ensure that the  */
+DELIMITER / / CREATE TEMPORARY TABLE INFORM_SUPERVISOR(Super_ssn int, ssn int);
+CREATE TRIGGER SALARY_VIOLATION BEFORE
+UPDATE ON EMPLOYEE FOR EACH ROW BEGIN IF (
+        NEW.Salary > (
+            SELECT Salary
+            FROM employee
+            WHERE Ssn = NEW.Super_ssn
+        )
+    ) THEN
+SELECT NEW.Super_ssn,
+    NEW.Ssn INTO INFORM_SUPERVISOR;
+END IF;
+END / / DELIMITER;
+/* V1: View one */
+CREATE VIEW WORKS_ON1 AS
+SELECT Fname,
+    Lname,
+    Pname,
+    works_on.Hours
+FROM EMPLOYEE,
+    PROJECT,
+    WORKS_ON
+WHERE Ssn = Essn
+    AND Pno = Pnumber;
+/* V2: View two */
+CREATE VIEW DEPT_INFO(Dept_name, No_of_emps, Total_Sal) AS
+SELECT Dname,
+    COUNT(*),
+    SUM(Salary)
+FROM DEPARTMENT,
+    EMPLOYEE
+WHERE Dnumber = Dno
+GROUP BY Dname;
