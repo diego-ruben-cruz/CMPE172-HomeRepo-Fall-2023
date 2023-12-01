@@ -10,9 +10,6 @@ SELECT Pnumber,
     Dnum,
     Lname,
     Bdate,
-    FROM employee,
-    project
-    NATURAL JOIN department
-WHERE department.Mgr_Ssn = employee.Ssn
-    AND Plocation = 'Stafford';
+    FROM project
+    NATURAL JOIN department 
 -- Q03: Find the names of employees who work on all the projects controlled by department number 5
