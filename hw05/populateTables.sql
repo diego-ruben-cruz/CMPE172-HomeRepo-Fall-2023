@@ -111,9 +111,9 @@ VALUES (1, 'Houston'),
     (5, 'Houston');
 -- Insert values into projects table
 INSERT INTO project
-VALUES ('ProjectX', 1, 'Bellaire', 5),
-    ('ProjectY', 2, 'Sugarland', 5),
-    ('ProjectZ', 3, 'Houston', 5),
+VALUES ('ProductX', 1, 'Bellaire', 5),
+    ('ProductY', 2, 'Sugarland', 5),
+    ('ProductZ', 3, 'Houston', 5),
     ('Computerization', 10, 'Stafford', 4),
     ('Reorganization', 20, 'Houston', 1),
     ('Newbenefits', 30, 'Stafford', 4);
